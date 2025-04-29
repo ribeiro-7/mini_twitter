@@ -18,7 +18,7 @@ def createTweet(request):
     tweet = Tweet.objects.create(
         user=user,
         content=data['content'],
-        image=data['image']
+        image=request.FILES.get('image')
     )
 
     serializer = TweetSerializer(tweet, many=False)
