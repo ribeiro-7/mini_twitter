@@ -16,15 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from tweets.views import *
-from rest_framework import routers
-
-router = routers.DefaultRouter()
-router.register('tweets', TweetView, basename='Tweets')
+from tweets.views.tweet_views import *
+from tweets.urls import user_urls
 
 
 urlpatterns = [
-    path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('tweet/<int:pk>/', TweetIdView.as_view(), name='tweet-id')
+    path('user/', include(user_urls)),
 ]
