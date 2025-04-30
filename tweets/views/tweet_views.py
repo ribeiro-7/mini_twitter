@@ -112,10 +112,10 @@ def likeDislikeFunction(request, pk):
 
 
 #usuario faz pesquisa por palavra-chave ou hashtag
-api_view(['GET'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def searchTweets(request):
     query = request.query_params.get('q', '')
-    tweets = Tweet.objects.get(content__icontain=query).order_by('-created_at')
+    tweets = Tweet.objects.filter(content__icontains=query).order_by('-created_at')
     serializer = TweetSerializer(tweets, many=True, context={'request': request})
     return Response(serializer.data)
