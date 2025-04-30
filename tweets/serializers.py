@@ -5,9 +5,25 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class TweetSerializer(serializers.ModelSerializer):
+    #pega o username do usuario para colocar no tweet
+    username = serializers.CharField(source='user.username', read_only=True)
+    #formata a data para o formato "dia de mês de ano - hora:minuto:segundo"
+    created_at = serializers.DateTimeField(format="%d de %B de %Y - %H:%M:%S")
+
+    like_count = serializers.SerializerMethodField()
+    is_liked = serializers.SerializerMethodField()
+
     class Meta:
         model = Tweet
-        fields = ['content', 'image', 'created_at']
+        fields = ['id', 'username', 'content', 'image', 'like_count', 'is_liked', 'created_at']
+
+
+    def get_like_count(self, obj):
+        return obj.likes.count()
+    
+    def get_is_liked(self, obj):
+        user = self.context.get('request').user
+        return user.is_authenticated and obj.likes.filter(id=user.id).exists()
 
 
 class UserSerializer(serializers.ModelSerializer):

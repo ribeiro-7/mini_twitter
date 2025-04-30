@@ -7,6 +7,7 @@ class Tweet(models.Model):
     content = models.TextField(null=True, blank=True)
     image = models.FileField(upload_to='images/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='liked_tweets', blank=True)
 
     class Meta:
         ordering = ['-id']

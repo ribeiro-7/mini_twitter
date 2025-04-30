@@ -17,23 +17,32 @@ CASO 4: Visualização de Feed
 ------------------------------------------------------------------------------------------------------------------
 
 Tweets: 
-    -> Creating 
+    -> Creating - done
         -> Text - done
-        -> Image
-    -> Update (Edit) 
-    -> Delete 
-    -> Like
+        -> Image - ...
+    -> Update (Edit) - done
+    -> Delete - done
+    -> Like - done
+        -> bonus: like count for each post - done
+
+    -> colocar o id do tweet e o username do autor - done
 
 Users:
     -> Register - done
     -> Login - done
-    -> Logout - ...
+    -> Logout - done
     -> Profile
         -> Follow - done
+        bonus: followers count in the user's profile - ...
     -> Delete - done
     -> Feed - done
         -> global - done
         -> foryou - done
 
 
-Followers 
+Caching & Scalability -> ...
+pagination -> ...
+testing - > ...
+Documentation -> ...
+Docker -> ...
+Git -> done

@@ -10,7 +10,7 @@ from profiles.models import Profile
 @api_view(['GET'])
 def tweetsGlobal(request):
     tweets = Tweet.objects.all().order_by('-created_at')
-    serializer = TweetSerializer(tweets, many=True)
+    serializer = TweetSerializer(tweets, many=True, context={'request': request})
     return Response(serializer.data)
 
 #tweets somente de pessoas que você segue
@@ -25,7 +25,7 @@ def tweetsForyou(request):
 
         tweets = Tweet.objects.filter(user__in=following_users).order_by('-created_at')
 
-        serializer = TweetSerializer(tweets, many=True)
+        serializer = TweetSerializer(tweets, many=True, context={'request': request})
         return Response(serializer.data)
     
     except Profile.DoesNotExist:
@@ -47,3 +47,65 @@ def createTweet(request):
 
     serializer = TweetSerializer(tweet, many=False)
     return Response(serializer.data)
+
+#atualiza tweet
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def updateTweet(request, pk):
+    user = request.user
+    
+    try:
+        tweet = Tweet.objects.get(id=pk)
+
+        if tweet.user != user:
+            return Response({'error': 'Você não tem permissão para editar esse tweet.'}, status=403)
+        
+        content = request.data.get('content', tweet.content)
+        image = request.FILES.get('image', tweet.image)
+
+        tweet.content = content
+        tweet.image = image
+        tweet.save()
+
+        serializer = TweetSerializer(tweet, many=False)
+        return Response(serializer.data)
+
+    except Tweet.DoesNotExist:
+        return Response({'error': 'Tweet inexistente.'}, status=404)
+    
+#deleta tweet
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteTweet(request, pk):
+    user = request.user
+
+    try:
+        tweet = Tweet.objects.get(id=pk)
+    except Tweet.DoesNotExist:
+        return Response({'error': 'Tweet inexistente.'}, status=404)
+
+    
+    if tweet.user != user:
+        return Response({'error': 'Você não pode excluir o tweet de outro usuário.'}, status=403)
+        
+    tweet.delete()
+    return Response({'detail': 'Tweet deletado com sucesso.'}, status=204)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def likeDislikeFunction(request, pk):
+    
+    user = request.user
+
+    try:
+        tweet = Tweet.objects.get(id=pk)
+    except Tweet.DoesNotExist:
+        return Response({'error': 'Tweet não encontrado'}, 404)
+    
+    if tweet.likes.filter(id=user.id).exists():
+        tweet.likes.remove(user)
+        return Response({'detail': 'Like removido!'}, status=204)
+    else:
+        tweet.likes.add(user)
+        return Response({'detail': 'Like adicionado ao tweet!'}, status=204)
