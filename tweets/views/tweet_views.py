@@ -37,15 +37,16 @@ def tweetsForyou(request):
 @permission_classes([IsAuthenticated])
 def createTweet(request):
     user = request.user
-    data = request.data
+    content = request.POST.get('content')
+    image = request.FILES.get('image')
 
     tweet = Tweet.objects.create(
         user=user,
-        content=data['content'],
-        image=request.FILES.get('image')
+        content=content,
+        image=image
     )
 
-    serializer = TweetSerializer(tweet, many=False)
+    serializer = TweetSerializer(tweet, many=False, context={'request': request})
     return Response(serializer.data)
 
 #atualiza tweet

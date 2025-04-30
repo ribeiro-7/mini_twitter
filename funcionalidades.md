@@ -19,7 +19,7 @@ CASO 4: Visualização de Feed
 Tweets: 
     -> Creating - done
         -> Text - done
-        -> Image - ...
+        -> Image - done
     -> Update (Edit) - done
     -> Delete - done
     -> Like - done

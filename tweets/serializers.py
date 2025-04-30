@@ -9,6 +9,9 @@ from profiles.models import Profile
 class TweetSerializer(serializers.ModelSerializer):
     #pega o username do usuario para colocar no tweet
     username = serializers.CharField(source='user.username', read_only=True)
+    
+    image = serializers.ImageField(use_url=True)
+
     #formata a data para o formato "dia de mês de ano - hora:minuto:segundo"
     created_at = serializers.DateTimeField(format="%d de %B de %Y - %H:%M:%S")
 
