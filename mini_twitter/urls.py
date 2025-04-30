@@ -17,10 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from tweets.views.tweet_views import *
-from tweets.urls import user_urls
+from tweets.urls import user_urls, tweets_urls
+from profiles import profile_urls
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include(user_urls)),
+    path('profile/', include(profile_urls)),
+    path('tweets/', include(tweets_urls))
 ]

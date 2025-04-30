@@ -17,21 +17,23 @@ CASO 4: Visualização de Feed
 ------------------------------------------------------------------------------------------------------------------
 
 Tweets: 
-    -> Creating
-        -> Text
+    -> Creating 
+        -> Text - done
         -> Image
-    -> Update (Edit)
-    -> Delete
+    -> Update (Edit) 
+    -> Delete 
     -> Like
 
 Users:
-    -> Register
-    -> Login
-    -> Logout
+    -> Register - done
+    -> Login - done
+    -> Logout - ...
     -> Profile
-        -> Follow button
-    -> Feed
-        -> User + who they follow"
+        -> Follow - done
+    -> Delete - done
+    -> Feed - done
+        -> global - done
+        -> foryou - done
 
 
 Followers 
