@@ -7,5 +7,6 @@ urlpatterns = [
     path('create/', createTweet, name='create_tweet'),
     path('update/<int:pk>', updateTweet, name='update_tweet'),
     path('delete/<int:pk>', deleteTweet, name='delete_tweet'),
-    path('<int:pk>/like/', likeDislikeFunction, name='like-dislike')
+    path('<int:pk>/like/', likeDislikeFunction, name='like-dislike'),
+    path('search/', searchTweets, name='search_tweets')
 ]

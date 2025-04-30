@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import Tweet
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.response import Response
+from profiles.models import Profile
 
 
 class TweetSerializer(serializers.ModelSerializer):
@@ -27,9 +29,18 @@ class TweetSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    follower_count = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ['id', 'email', 'username']
+        fields = ['id', 'email', 'username', 'follower_count']
+
+    def get_follower_count(self, obj):
+        try:
+            return obj.profile.followers.count()
+        except Profile.DoesNotExist:
+            return Response({'error': 'Perfil não encontrado.'}, status=404)
+    
 
 class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only = True)

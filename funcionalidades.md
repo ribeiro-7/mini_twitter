@@ -33,7 +33,7 @@ Users:
     -> Logout - done
     -> Profile
         -> Follow - done
-        bonus: followers count in the user's profile - ...
+        bonus: followers count in the user's profile - done
     -> Delete - done
     -> Feed - done
         -> global - done

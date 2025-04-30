@@ -109,3 +109,13 @@ def likeDislikeFunction(request, pk):
     else:
         tweet.likes.add(user)
         return Response({'detail': 'Like adicionado ao tweet!'}, status=204)
+
+
+#usuario faz pesquisa por palavra-chave ou hashtag
+api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def searchTweets(request):
+    query = request.query_params.get('q', '')
+    tweets = Tweet.objects.get(content__icontain=query).order_by('-created_at')
+    serializer = TweetSerializer(tweets, many=True, context={'request': request})
+    return Response(serializer.data)
