@@ -10,6 +10,7 @@ from profiles.models import Profile
 
 #tweet de todos usuarios
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def tweetsGlobal(request):
     tweets = Tweet.objects.all().order_by('-created_at')
     paginator = PageNumberPagination()
