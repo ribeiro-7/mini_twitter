@@ -8,5 +8,5 @@ urlpatterns = [
     path('login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('logout/', logoutUser, name='user_logout'),
-    path('delete/<str:pk>', deleteUser, name='delete_user'),
+    path('delete/', deleteUser, name='delete_user'),
 ]

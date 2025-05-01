@@ -1,8 +1,10 @@
 from tweets.models import Tweet
 from tweets.serializers import TweetSerializer
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from profiles.models import Profile
 
 
@@ -10,8 +12,11 @@ from profiles.models import Profile
 @api_view(['GET'])
 def tweetsGlobal(request):
     tweets = Tweet.objects.all().order_by('-created_at')
-    serializer = TweetSerializer(tweets, many=True, context={'request': request})
-    return Response(serializer.data)
+    paginator = PageNumberPagination()
+    paginator.page_size = 10
+    result_page = paginator.paginate_queryset(tweets, request)
+    serializer = TweetSerializer(result_page, many=True, context={'request': request})
+    return paginator.get_paginated_response(serializer.data)
 
 #tweets somente de pessoas que você segue
 @api_view(['GET'])
@@ -25,8 +30,12 @@ def tweetsForyou(request):
 
         tweets = Tweet.objects.filter(user__in=following_users).order_by('-created_at')
 
-        serializer = TweetSerializer(tweets, many=True, context={'request': request})
-        return Response(serializer.data)
+        paginator = PageNumberPagination()
+        paginator.page_size = 10
+        result_page = paginator.paginate_queryset(tweets, request)
+
+        serializer = TweetSerializer(result_page, many=True, context={'request': request})
+        return paginator.get_paginated_response(serializer.data)
     
     except Profile.DoesNotExist:
         return Response({'detail': 'Esse perfil não existe!'}, status=404)
@@ -35,10 +44,11 @@ def tweetsForyou(request):
 #fazer seu proprio tweet
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser, JSONParser])
 def createTweet(request):
     user = request.user
-    content = request.POST.get('content')
-    image = request.FILES.get('image')
+    content = request.data.get('content')
+    image = request.data.get('image')
 
     tweet = Tweet.objects.create(
         user=user,
@@ -68,7 +78,7 @@ def updateTweet(request, pk):
         tweet.image = image
         tweet.save()
 
-        serializer = TweetSerializer(tweet, many=False)
+        serializer = TweetSerializer(tweet, many=False, context={'request': request})
         return Response(serializer.data)
 
     except Tweet.DoesNotExist:

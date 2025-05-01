@@ -41,20 +41,24 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 @api_view(['POST'])
 def registerUser(request):
+    
     data = request.data
-    try:
-        user = User.objects.create(
-            email = data['email'],
-            username = data['username'],
-            password = make_password(data['password'])
-        )
 
-        serializer = UserSerializerWithToken(user, many=False)
-        return Response(serializer.data)
+    if User.objects.filter(email=data['email']).exists():
+        return Response({'detail': 'Esse email já possui uma conta.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    if User.objects.filter(username=data['username']).exists():
+        return Response({'detail': 'Esse nome de usuário já está em uso.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    user = User.objects.create(
+        email = data['email'],
+        username = data['username'],
+        password = make_password(data['password'])
+    )
 
-    except:
-        message = {"Detail":"O usuário com este e-mail já está cadastrado"}
-        return Response(message,status=status.HTTP_400_BAD_REQUEST)
+    serializer = UserSerializerWithToken(user, many=False)
+    return Response(serializer.data)
+
     
 
 @api_view(['POST'])
@@ -79,9 +83,11 @@ def getUserProfile(request):
     return Response(serializer.data)
 
 @api_view(['DELETE'])
-def deleteUser(request, pk):
-    userForDeletion = User.objects.delete(id = pk)
-    userForDeletion.delete()
-    return Response("O usuário foi deletado com sucesso.")
+@permission_classes([IsAuthenticated])
+def deleteUser(request):
+    user = request.user
+    user.delete()
+    return Response("Usuário foi deletado com sucesso.", status=204)
+
 
 
