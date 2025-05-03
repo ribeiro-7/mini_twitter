@@ -19,6 +19,8 @@ class TweetTests(TestCase):
     #teste para criar o tweet completo
     def test_create_tweet_with_content_and_image_authenticated(self):
 
+        self.authenticated_user()
+
         image = SimpleUploadedFile(
             name='test_image.jpg',
             content=b'\x47\x49\x46\x38\x39\x61',  
@@ -26,7 +28,7 @@ class TweetTests(TestCase):
         )
 
         data = {
-            'content': 'Tweet teste com contéudo e imagem',
+            'content': 'Tweet teste com conteúdo e imagem',
             'image': image
         }
         
@@ -34,7 +36,7 @@ class TweetTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Tweet.objects.count(), 1)
         tweet = Tweet.objects.first()
-        self.assertEqual(tweet.content, 'Tweet com conteúdo e imagem!')
+        self.assertEqual(tweet.content, 'Tweet teste com conteúdo e imagem')
         self.assertTrue(tweet.image)
 
     
@@ -52,7 +54,7 @@ class TweetTests(TestCase):
             'image': image
         }
         
-        response = self.cliente.post('/tweets/create/', data, format='multipart')
+        response = self.client.post('/tweets/create/', data, format='multipart')
         self.assertEqual(response.status_code, 401)
 
 
@@ -60,6 +62,9 @@ class TweetTests(TestCase):
 
     #teste para criar tweet apenas com contéudo
     def test_create_tweet_with_only_content_authenticated(self):
+
+        self.authenticated_user()
+
         data = {'content': 'Conteúdo válido'}
         response = self.authenticated_client.post('/tweets/create/', data, format='json')
         self.assertEqual(response.status_code, 200)
@@ -78,6 +83,8 @@ class TweetTests(TestCase):
     #teste para criar tweet apenas com imagem
     def test_create_tweet_with_only_image_autheticated(self):
         
+        self.authenticated_user()
+
         #simulando um arquivo de imagem
         image = SimpleUploadedFile(
             name='test_image.jpg',
@@ -86,68 +93,62 @@ class TweetTests(TestCase):
         )
 
         data = {'image': image}
-        response = self.authenticated_client.post('tweets/create/', data, format='multipart')
+        response = self.authenticated_client.post('/tweets/create/', data, format='multipart')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(Tweet.object.count(), 1)
+        self.assertEqual(Tweet.objects.count(), 1)
         self.assertIsNotNone(Tweet.objects.first().image)
-
-
-
-    #teste para criar tweet apenas com imagem sem autorização
-    def test_create_tweet_with_only_image_unauthorized(self):
-        
-        #simulando um arquivo de imagem
-        image = SimpleUploadedFile(
-            name='test_image.jpg',
-            content=b'\x47\x49\x46\x38\x39\x61',  
-            content_type='image/jpeg'
-        )
-
-        data = {'image': image}
-        response = self.client.post('tweets/create/', data, format='multipart')
-
-        self.assertEqual(response.status_code, 401)
 
 
     #teste para criar tweet sem nenhum dos campos
     def test_create_tweet_without_content(self):
+
+        self.authenticated_user()
+
         data = {'content': ''}
-        response = self.authenticated_client.post('tweets/create/', data, format='json')
+        response = self.authenticated_client.post('/tweets/create/', data, format='json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('É necessário fornecer conteúdo ou imagem.', response.data['error'])
+        self.assertIn('É necessário pelo menos um campo para criar um tweet', response.data['error'])
 
 
     #teste para ver feed global autenticado
     def test_feed_global_authenticated(self):
 
-        response = self.authenticated_client.get('tweets/global/')
+        self.authenticated_user()
+
+        response = self.authenticated_client.get('/tweets/global/')
         self.assertEqual(response.status_code, 200)
 
     
     #teste para ver feed global sem autorização
     def test_feed_global_unauthorized(self):
 
-        response = self.client.get('tweets/global/')
+        response = self.client.get('/tweets/global/')
         self.assertEqual(response.status_code, 401)
 
     
     #teste para ver feed for you autorizado
     def test_feed_for_you_authenticated(self):
-        response = self.authenticated_client.get('tweets/foryou/')
+
+        self.authenticated_user()
+
+        response = self.authenticated_client.get('/tweets/foryou/')
         self.assertEqual(response.status_code, 200)
 
 
     #teste para ver feed for you sem autorização
     def test_feed_for_you_unauthorized(self):
-        response = self.client.get('tweets/foryou/')
+        response = self.client.get('/tweets/foryou/')
         self.assertEqual(response.status_code, 401)
 
 
     #teste para editar tweet autorizado
     def test_update_tweet_autenticated(self):
 
-        tweet = Tweet.objects.create(user=self.authenticated_client, content="Teste editar tweet autenticado")
+        self.authenticated_user()
+
+
+        tweet = Tweet.objects.create(user=self.user, content="Teste editar tweet autenticado")
 
         update_data = {'content': 'Teste tweet editado autenticado'}
 
@@ -183,7 +184,9 @@ class TweetTests(TestCase):
     #teste para deletar tweet autorizado
     def test_delete_tweet_authenticated(self):
 
-        tweet = Tweet.objects.create(user=self.authenticated_client, content="tweet para deleção")
+        self.authenticated_user()
+
+        tweet = Tweet.objects.create(user=self.user, content="tweet para deleção")
 
         url = reverse('delete_tweet', args=[tweet.id])
         response = self.authenticated_client.delete(url)
@@ -214,26 +217,30 @@ class TweetTests(TestCase):
 
     #teste para curtir ou descurtir tweet autorizado
     def test_like_dislike_function_authenticated(self):
+        
+        self.authenticated_user()
 
-        tweet = Tweet.object.create(user=self.authenticated_client, content="Tweet para teste de curtida")
+        tweet = Tweet.objects.create(user=self.user, content="Tweet para teste de curtida")
 
         url = reverse('like-dislike', args=[tweet.id])
 
         #response para like
         response_like = self.authenticated_client.post(url)
         self.assertEqual(response_like.status_code, 204)
-        self.assertTrue(tweet.likes.filter(id=self.authenticated_client.id).exists())
+        self.assertTrue(tweet.likes.filter(id=self.user.id).exists())
 
         #response para dislike
         response_dislike = self.authenticated_client.post(url)
         self.assertEqual(response_dislike.status_code, 204)
-        self.assertTrue(tweet.likes.filter(id=self.authenticated_client.id).exists())
+        self.assertFalse(tweet.likes.filter(id=self.user.id).exists())
 
     
     #teste para curtir ou descurtir tweet sem autorização
     def test_like_dislike_function_unauthorized(self):
 
-        tweet = Tweet.object.create(user=self.authenticated_client, content="Tweet para teste de curtida sem autorização")
+        self.authenticated_user()
+
+        tweet = Tweet.objects.create(user=self.user, content="Tweet para teste de curtida sem autorização")
 
         url = reverse('like-dislike', args=[tweet.id])
 
@@ -243,10 +250,12 @@ class TweetTests(TestCase):
 
     
     #teste para pesquisa aunteticado
-    def test_search_function_authenticated(self):
+    def test_search_function_authenticated(self):   
+        
+        self.authenticated_user()
 
-        Tweet.object.create(user=self.authenticated_client, content="Tweet para teste de pesquisa autorizado")
-        Tweet.object.create(user=self.authenticated_client, content="Tweet sem a palabra desejada")
+        Tweet.objects.create(user=self.user, content="Tweet para teste de pesquisa autorizado")
+        Tweet.objects.create(user=self.user, content="Tweet sem a palabra desejada")
 
         response = self.authenticated_client.get('/tweets/search/?q=pesquisa')
 
@@ -258,8 +267,10 @@ class TweetTests(TestCase):
     #teste para pesquisa sem autorização
     def test_search_function_unauthorized(self):
 
-        Tweet.object.create(user=self.authenticated_client, content="Tweet para teste de pesquisa autorizado")
-        Tweet.object.create(user=self.authenticated_client, content="Tweet sem a palabra desejada")
+        self.authenticated_user() 
+
+        Tweet.objects.create(user=self.user, content="Tweet para teste de pesquisa autorizado")
+        Tweet.objects.create(user=self.user, content="Tweet sem a palabra desejada")
 
         response = self.client.get('/tweets/search/?q=pesquisa')
 

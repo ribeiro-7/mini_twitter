@@ -63,7 +63,7 @@ def createTweet(request):
 
     #se o usuario tentar criar um tweet sem conteúdo ou imagem, é necesário pelo menos um dos dois campos
     if (not content or content.strip == '') and not image:
-        return Response({'error': 'É necessário pelo menos um campo para criar um tweet'})
+        return Response({'error': 'É necessário pelo menos um campo para criar um tweet'}, status=400)
 
     tweet = Tweet.objects.create(
         user=user,

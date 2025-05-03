@@ -18,10 +18,13 @@ class ProfileTest(APITestCase):
 
     #teste de relação de follow e unfollow
     def test_follow_and_unfollow(self):
-        url = f'/users/{self.target.username}/follow/' 
+        self.users_authenticated()
+
+        url = f'/profile/follow/{self.target.username}' 
 
         response_follow = self.client.post(url)
-        self.assertEqual(response_follow.status_code, status.HTTP_200_OK)
+
+        self.assertEqual(response_follow.status_code, 200)
         self.assertIn(self.follower, self.target_profile.followers.all())
         self.assertEqual(response_follow.data['message'], f'Você começou a seguir {self.target.username}')
 
