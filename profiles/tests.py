@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
-from rest_framework.test import APITestCase, APIClient
+from rest_framework.test import APIClient
 from rest_framework import status
 from .models import Profile 
+from django.test import TestCase
 
-class ProfileViewTest(APITestCase):
+class ProfileViewTest(TestCase):
 
     #usuarios para teste de relação
     def users_authenticated(self):
