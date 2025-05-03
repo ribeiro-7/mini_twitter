@@ -5,6 +5,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from profiles.models import Profile
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 
 class TweetSerializer(serializers.ModelSerializer):
     #pega o username do usuario para colocar no tweet
@@ -31,6 +33,7 @@ class TweetSerializer(serializers.ModelSerializer):
         return user.is_authenticated and obj.likes.filter(id=user.id).exists()
 
 
+
 class UserSerializer(serializers.ModelSerializer):
     follower_count = serializers.SerializerMethodField()
 
@@ -55,3 +58,24 @@ class UserSerializerWithToken(UserSerializer):
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
+    
+    
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        serializer = UserSerializerWithToken(self.user).data
+
+        for k, v in serializer.items():
+            data[k] = v
+
+        return data
+
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        token['username'] = user.username
+        token['email'] = user.email
+
+        return token

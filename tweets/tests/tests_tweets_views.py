@@ -264,3 +264,6 @@ class TweetTests(TestCase):
         response = self.client.get('/tweets/search/?q=pesquisa')
 
         self.assertEqual(response.status_code, 401)
+
+
+    
