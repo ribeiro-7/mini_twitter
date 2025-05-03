@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 from django.urls import reverse
 
 
-class TweetTests(TestCase):
+class TweetViewsTests(TestCase):
 
 
     #cria um usuário autenticado para fazer as requisições

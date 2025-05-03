@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from django.urls import reverse
 
-class UserTests(TestCase):
+class UserViewsTests(TestCase):
 
     #cria um usuário autenticado para fazer as requisições
     def authenticated_user(self):

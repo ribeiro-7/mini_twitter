@@ -3,7 +3,7 @@ from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
 from .models import Profile 
 
-class ProfileTest(APITestCase):
+class ProfileViewTest(APITestCase):
 
     #usuarios para teste de relação
     def users_authenticated(self):
