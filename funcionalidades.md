@@ -41,7 +41,7 @@ Users:
 
 
 pagination -> done
-testing - > ...
+testing - > done
 Documentation -> done
 Docker -> ...
 Git -> done
