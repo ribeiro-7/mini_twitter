@@ -76,5 +76,10 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - `docker-compose exec web python manage.py test tweets.tests.tests_tweet_model`
   - `docker-compose exec web python manage.py test tweets.tests.tests_user_model`
   - `docker-compose exec web python manage.py test profiles.tests.tests_profile_model`
-  
+
+## 🛡️ Segurança
+  - Senhas são criptografadas com o sistema padrão do Django
+  - Autenticação feita com JWT
+  - Tokens refresh podem ser revogados com logout
+  - Todas os endpoints protegidos, é necessário passar o token de acesso Bearer Token para fazer as requisições.
 
