@@ -12,8 +12,8 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - O usuário também consegue deletar sua própria conta.
   
 **Tweets**:
-  - O usuário tem acesso a um feed 'for you' contendo os tweets apenas daqueles usuários que ele segue. Os tweets são ordenados pela data de criação mais recente.
-  - O usuário tem acesso a um feed 'global' contendo todos os tweets de todos os usuários por ordem de criação mais recente.
+  - O usuário tem acesso a um feed 'for you' contendo os tweets apenas daqueles usuários que ele segue. Os tweets são ordenados pela data de criação mais recente. O feed possui 10 publicações por página.
+  - O usuário tem acesso a um feed 'global' contendo todos os tweets de todos os usuários por ordem de criação mais recente. O feed possui 10 publicações por página.
   - É possível criar tweet com conteúdo em texto e uma imagem, sendo obrigatório no mínimo um dos dois campos.
   - É possível editar o tweet alterando tanto texto, como imagem.
   - Também é posível deletar um tweet.
