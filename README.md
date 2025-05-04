@@ -23,35 +23,20 @@ Este projeto foi desenvolvido para a seleção de desenvolvedore backend Python 
 **Profile**:
   - Cada usuário quando cria sua conta tem automaticamente seu perfil criado e é capaz de seguir o perfil de outros usuários e, se já estiver seguindo, pode deixar de seguir.
 
-📂 Models
+##📂 Models
 
-User (modelo padrão do Django)
+**User (modelo padrão do Django Contrib)**
+  - Utilizado para autenticação com JWT
+  - Campos padrões: id, email, username, password
 
-Utilizado para autenticação com JWT
+**Profile**
+  - user: Chave estrangeira para User
+  - Relacionado automaticamente ao criar um novo usuário
 
-Campos padrões: username, email, password, etc.
-
-Profile
-
-user: Chave estrangeira para User
-
-bio: Texto descritivo do usuário
-
-birth_date: Data de nascimento (opcional)
-
-location: Localização (opcional)
-
-Relacionado automaticamente ao criar um novo usuário
-
-Tweet
-
-user: Usuário autor do tweet
-
-content: Texto do tweet (pode ser vazio se houver imagem)
-
-image: Upload de imagem (opcional)
-
-created_at: Timestamp de criação
-
-Tweets são exibidos em ordem decrescente por data no feed global
+  **Tweet**
+    - user: Usuário autor do tweet
+    - content: Texto do tweet (pode ser vazio se houver imagem)
+    - image: Upload de imagem (opcional)
+    - created_at: Timestamp de criação
+    - Tweets são exibidos em ordem decrescente por data no feed for you e global
 
