@@ -84,3 +84,6 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - Tokens refresh podem ser revogados com logout
   - Todas os endpoints protegidos, é necessário passar o token de acesso Bearer Token para fazer as requisições.
 
+## 🔟 Requisições
+  - Na documentação fornecida acima mostra o formato json utilizado no postman para que as requisições possam ser feitas corretamente.
+
