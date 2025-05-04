@@ -58,8 +58,10 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
 
   **Build e up do conteiner**:
   - `docker-compose up --build`
+    
   **Criando as tabelas no banco de dados**:
   - `docker-compose exec web python manage.py migrate`
+    
   **Se quiser criar um superuser**:
   - `docker-compose exec web python manage.py createsuperuser`
 
