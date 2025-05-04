@@ -1,7 +1,7 @@
 # Mini Twitter - Django Rest Framework
 
 ## 📚 Sobre o Projeto
-Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python da empresa b2bit. O projeto "Mini-twitter", é uma API RESTful desenvolvida com Django e Django Rest Framework que simula funcionalidades básicas de uma rede social estilo Twitter. O sistema permite que usuários se cadastrem, publiquem tweets com ou sem imagem, vejam um feed global com todos os tweets e um feed 'for you' com tweets apenas de quem o usuário segue e ele é capaz de interagir com perfis de outros usuários, além de outras funcionalidades muito interessantes. Toda a aplicação é conteinerizada com Docker, utilizando PostgreSQL como banco de dados.
+Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python da empresa b2bit. O projeto "Mini-twitter", é uma API RESTful desenvolvida com Django e Django Rest Framework que simula funcionalidades básicas de uma rede social estilo Twitter. O sistema permite que usuários se cadastrem, publiquem tweets com ou sem imagem, vejam um feed global com todos os tweets e um feed 'for you' com tweets apenas de pessoas que ele segue. Além disso, o usuário é capaz de interagir com perfis de outros usuários, além de outras funcionalidades muito interessantes. Toda a aplicação é conteinerizada com Docker, utilizando PostgreSQL como banco de dados.
 
 ## 🚀 Funcionalidades
 
@@ -53,7 +53,7 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - `git clone https://github.com/ribeiro-7/mini-twitter.git`
   - `cd mini-twitter`
   - Dentro do projeto há um arquivo chamada '.env.example' lá tem instruções para criar e configurar o arquivo .env para colocar suas informações de configuração.
-  - Lembrando que é necessário ter o PostgreSQL instalado na sua máquina e adicionar suas informações corretamente, leia atentamente as instruções no arquivo .env.example e siga passo a passo.
+  - Lembrando que é necessário ter o PostgreSQL instalado em sua máquina e adicionar suas informações corretamente, leia atentamente as instruções no arquivo .env.example e siga passo a passo.
 
 ## 🐳 Docker
 
@@ -79,11 +79,12 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - `docker-compose exec web python manage.py test profiles.tests.tests_profile_model`
 
 ## 🛡️ Segurança
-  - Senhas são criptografadas com o sistema padrão do Django
-  - Autenticação feita com JWT
-  - Tokens refresh podem ser revogados com logout
+  - Senhas são criptografadas com o sistema padrão do Django.
+  - Autenticação feita com JWT.
+  - Tokens refresh podem ser revogados com logout.
   - Todas os endpoints protegidos, é necessário passar o token de acesso Bearer Token para fazer as requisições.
 
 ## 🔟 Requisições
   - Na documentação fornecida acima mostra o formato json utilizado no postman para que as requisições possam ser feitas corretamente.
+  - Lembre de passar o token de acesso no campo de authorization com o tipo Bearer Token para ter autorização nas requisições.
 
