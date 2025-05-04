@@ -1,4 +1,4 @@
-# Mini Twiiter - Django Rest Framework
+# Mini Twitter - Django Rest Framework
 
 ## 📚 Sobre o Projeto
 Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python da empresa b2bit. O projeto "Mini-twitter", é uma API RESTful desenvolvida com Django e Django Rest Framework que simula funcionalidades básicas de uma rede social estilo Twitter. O sistema permite que usuários se cadastrem, publiquem tweets com ou sem imagem, vejam um feed global com todos os tweets e um feed 'for you' com tweets apenas de quem o usuário segue e ele é capaz de interagir com perfis de outros usuários, além de outras funcionalidades muito interessantes. Toda a aplicação é conteinerizada com Docker, utilizando PostgreSQL como banco de dados.
