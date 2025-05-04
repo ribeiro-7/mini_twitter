@@ -3,7 +3,7 @@
 ## 📚 Sobre o Projeto
 Este projeto foi desenvolvido para a seleção de desenvolvedore backend Python da empresa b2bit. O projeto "Mini-twitter", é uma API RESTful desenvolvida com Django e Django Rest Framework que simula fun  cionalidades básicas de uma rede social estilo Twitter. O sistema permite que usuários se cadastrem, publiquem tweets com ou sem imagem, vejam um feed global com todos os tweets e um feed 'for you' com tweets apenas de quem o usuário segue e ele é capaz de interagir com perfis de outros usuários, além de outras funcionalidades muito interessantes. Toda a aplicação é conteinerizada com Docker, utilizando PostgreSQL como banco de dados.
 
-##🚀 Funcionalidades
+## 🚀 Funcionalidades
 
 **Users**:
   - Cadastro e login de usuários com JWT.
@@ -23,7 +23,7 @@ Este projeto foi desenvolvido para a seleção de desenvolvedore backend Python 
 **Profile**:
   - Cada usuário quando cria sua conta tem automaticamente seu perfil criado e é capaz de seguir o perfil de outros usuários e, se já estiver seguindo, pode deixar de seguir.
 
-##📂 Models
+## 📂 Models
 
 **User (modelo padrão do Django Contrib)**
   - Utilizado para autenticação com JWT
@@ -39,4 +39,6 @@ Este projeto foi desenvolvido para a seleção de desenvolvedore backend Python 
     - image: Upload de imagem (opcional)
     - created_at: Timestamp de criação
     - Tweets são exibidos em ordem decrescente por data no feed for you e global
+
+## 🔗 Relacionamentos
 
