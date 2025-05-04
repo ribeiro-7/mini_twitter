@@ -46,6 +46,33 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - Tweets são exibidos em ordem decrescente por data no feed for you e global
 
 ## 📄 Documentação
-  - A documentação foi feita pelo **Postman** e pode ser vista no link:
+  - A documentação foi feita pelo **Postman** com todos os endpoints e como as requisições são feitas. Pode ser vista no link:
   https://documenter.getpostman.com/view/40491697/2sB2j4fArv
+
+## ⚙️ Instalação
+  - git clone https://github.com/ribeiro-7/mini-twitter.git
+  - cd mini-twitter
+  - Dentro do projeto há um arquivo chamada '.env.example' lá tem instruções para criar e configurar o arquivo .env para colocar suas informações de configuração.
+
+## 🐳 Docker
+
+  **Build e up do conteiner**
+    - docker-compose up --build
+  **Criando as tabelas no banco de dados**
+    - docker-compose exec web python manage.py migrate
+  **Se quiser criar um superuser**
+    - docker-compose exec web python manage.py createsuperuser
+
+## ✅ Testes
+
+  **Testes de views**:
+  - docker-compose exec web python manage.py test tweets.tests.tests_tweets_views
+  - docker-compose exec web python manage.py test tweets.tests.tests_user_views
+  - docker-compose exec web python manage.py test profiles.tests.tests_profile_view
+    
+  **Testes de models**:
+    - docker-compose exec web python manage.py test tweets.tests.tests_tweet_model
+    - docker-compose exec web python manage.py test tweets.tests.tests_user_model
+    - docker-compose exec web python manage.py test profiles.tests.tests_profile_model
+  
 
