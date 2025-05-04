@@ -45,5 +45,7 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - Likes: Relação de muitos pra muitos com user
   - Tweets são exibidos em ordem decrescente por data no feed for you e global
 
-
+## 📄 Documentação
+  - A documentação foi feita pelo **Postman** e pode ser vista no link:
+  https://documenter.getpostman.com/view/40491697/2sB2j4fArv
 
