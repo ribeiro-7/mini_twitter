@@ -50,8 +50,8 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   https://documenter.getpostman.com/view/40491697/2sB2j4fArv
 
 ## ⚙️ Instalação
-  - git clone https://github.com/ribeiro-7/mini-twitter.git
-  - cd mini-twitter
+  - `git clone https://github.com/ribeiro-7/mini-twitter.git`
+  - `cd mini-twitter`
   - Dentro do projeto há um arquivo chamada '.env.example' lá tem instruções para criar e configurar o arquivo .env para colocar suas informações de configuração.
 
 ## 🐳 Docker
