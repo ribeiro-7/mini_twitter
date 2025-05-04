@@ -53,6 +53,7 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - `git clone https://github.com/ribeiro-7/mini-twitter.git`
   - `cd mini-twitter`
   - Dentro do projeto há um arquivo chamada '.env.example' lá tem instruções para criar e configurar o arquivo .env para colocar suas informações de configuração.
+  - Lembrando que é necessário ter o PostgreSQL instalado na sua máquina e adicionar suas informações corretamente, leia atentamente as instruções no arquivo .env.example e siga passo a passo.
 
 ## 🐳 Docker
 
