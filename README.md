@@ -32,6 +32,14 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - A documentação foi feita pelo **Postman** com todos os endpoints e como as requisições são feitas. Pode ser vista no link:
   https://documenter.getpostman.com/view/40491697/2sB2j4fArv
 
+## 🛠️ Principais ferramentas
+  - **Python 3.11**
+  - **Django 5.0**
+  - **Django REST Framework**
+  - **Simple JWT**
+  - **PostgreSQL**
+  - **Docker & Docker Compose**
+
 ## ⚙️ Instalação
   - `git clone https://github.com/ribeiro-7/mini-twitter.git`
   - `cd mini-twitter`
