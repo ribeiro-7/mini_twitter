@@ -96,6 +96,7 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
 
   **Endpoints Usuários:**
   **(É necessário passar o bearer token de acesso para ter autorização nas requisições, menos a de registro)**
+  
     - Register - `http://127.0.0.1:8000/user/register/`
     
     - Login - `http://127.0.0.1:8000/user/login/`
