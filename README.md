@@ -25,7 +25,7 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - Cada usuário quando cria sua conta tem automaticamente seu perfil criado e é capaz de seguir o perfil de outros usuários e, se já estiver seguindo, pode deixar de seguir.
 
 ## ⛓️ Relacionamento
-![Diagrama do banco de dados](diagrama/diagrama entidade-relacionamento.png)
+![Diagrama do banco de dados](diagrama/diagramaentidade-relacionamento.png)
 
 
 ## 📄 Documentação
