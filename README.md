@@ -89,3 +89,31 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - Na documentação fornecida acima mostra o formato json utilizado no postman para que as requisições possam ser feitas corretamente.
   - Lembre de passar o token de acesso no campo de authorization com o tipo Bearer Token para ter autorização nas requisições.
 
+## 📍Endpoints
+
+**Mais detalhes sobre os endpoints, acessar o link de documentação de API:**
+  - https://documenter.getpostman.com/view/40491697/2sB2j4fArv
+
+  **Endpoints Usuários:**
+  **(É necessário passar o bearer token de acesso para ter autorização nas requisições, menos a de registro)**
+    - Register - `http://127.0.0.1:8000/user/register/`
+    - Login - `http://127.0.0.1:8000/user/login/`
+    - Profile - `http://127.0.0.1:8000/user/profile/`
+    - Refresh - `http://127.0.0.1:8000/user/refresh/`
+    - Logout - `http://127.0.0.1:8000/user/logout/`
+    - Delete - `http://127.0.0.1:8000/user/delete/`
+
+  **Enpoints Tweets:**
+  **(É necessário passar o bearer token de acesso para ter autorização nas requisições)**
+    - Global - `http://127.0.0.1:8000/tweets/global/`
+    - Create - `http://127.0.0.1:8000/tweets/create/`
+    - Foryou - `http://127.0.0.1:8000/tweets/foryou/`
+    - Update - `http://127.0.0.1:8000/tweets/update/{tweet_id}`
+    - Delete - `http://127.0.0.1:8000/tweets/delete/{tweet_id}`
+    - Like - `http://127.0.0.1:8000/tweets/{tweet_id}/like`
+    - Search - `http://127.0.0.1:8000/tweets/search/?q={palavra-ou-#)`
+
+  **Endpoint Profile**
+  **(É necessário passar o bearer token de acesso para ter autorização na requisição)**
+    - Follow - `http://127.0.0.1:8000/user/follow/{username}`
+  
