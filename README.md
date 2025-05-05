@@ -24,26 +24,9 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
 **Profile**:
   - Cada usuário quando cria sua conta tem automaticamente seu perfil criado e é capaz de seguir o perfil de outros usuários e, se já estiver seguindo, pode deixar de seguir.
 
-## 📂 Models
+## ⛓️ Relacionamento
+![Diagrama do banco de dados](diagrama/diagrama.png)
 
-**User (modelo padrão do Django Contrib)**
-  - Campos padrões: id, email, username, password
-  - Utilizado para autenticação com JWT
-  - Se relaciona com tweets e profile
-
-**Profile**
-  - user: Chave estrangeira relacionada a user
-  - created_when: Data de criação do Perfil
-  - followers: Relação de muitos pra muitos com user
-  - Relacionado automaticamente ao criar um novo usuário
-
-**Tweets**
-  - user: Usuário autor do tweet (Chave Estrangeira de user)
-  - content: Texto do tweet (pode ser vazio se houver imagem)
-  - image: Upload de imagem (opcional)
-  - created_at: Timestamp de criação
-  - Likes: Relação de muitos pra muitos com user
-  - Tweets são exibidos em ordem decrescente por data no feed for you e global
 
 ## 📄 Documentação
   - A documentação foi feita pelo **Postman** com todos os endpoints e como as requisições são feitas. Pode ser vista no link:
