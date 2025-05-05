@@ -38,6 +38,16 @@ Este projeto foi desenvolvido para a seleção de desenvolvedores backend Python
   - Dentro do projeto há um arquivo chamada '.env.example' lá tem instruções para criar e configurar o arquivo .env para colocar suas informações de configuração.
   - Lembrando que é necessário ter o PostgreSQL instalado em sua máquina e adicionar suas informações corretamente, leia atentamente as instruções no arquivo .env.example e siga passo a passo.
 
+    **Caso for rodar sem docker:**
+      - `python -m venv venv`
+      - `source venv/bin/activate`  # Linux/macOS
+      - `venv\Scripts\activate`     # Windows
+      - `pip install -r requirements.txt`
+   
+    **Rodar o servidor**:
+      - `python manage.py migrate`
+      - `python manage.py runserver`
+
 ## 🐳 Docker
 
   **Build e up do conteiner**:
